@@ -1,35 +1,55 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Logo from '../pages/logo';
 import {
   TextField,
   Button,
   Paper,
-  Typography
+  Typography,
+  IconButton,
+  InputAdornment
 } from '@mui/material';
-
+import { Visibility, VisibilityOff } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
 type FormData = {
   email: string;
   password: string;
 };
 
 const Login: React.FC = () => {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors }
   } = useForm<FormData>();
 
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleTogglePassword = () => {
+    setShowPassword(prev => !prev);
+  };
+
   const onSubmit = (data: FormData) => {
     console.log('Login Data:', data);
+    navigate('/dashboard');
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen px-4" style={{ backgroundColor: '#c7ae6a' }}>
+    <div
+      className="flex items-center justify-center min-h-screen px-4"
+      style={{ backgroundColor: '#c7ae6a' }}
+    >
       <Paper elevation={3} className="p-8 w-full max-w-md">
-        <Logo/>
+        <Logo />
 
-        <Typography variant="h5" align="center" gutterBottom color="#2b3d5f" fontWeight={700}>
+        <Typography
+          variant="h5"
+          align="center"
+          gutterBottom
+          color="#2b3d5f"
+          fontWeight={700}
+        >
           Login to your Dashboard
         </Typography>
 
@@ -52,9 +72,10 @@ const Login: React.FC = () => {
             error={!!errors.email}
             helperText={errors.email?.message}
           />
+
           <TextField
             label="Password"
-            type="password"
+            type={showPassword ? 'text' : 'password'}
             variant="outlined"
             fullWidth
             {...register('password', {
@@ -66,8 +87,18 @@ const Login: React.FC = () => {
             })}
             error={!!errors.password}
             helperText={errors.password?.message}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton onClick={handleTogglePassword} edge="end">
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              )
+            }}
           />
-          <Button type="submit" fullWidth>
+
+          <Button type="submit" variant="contained" fullWidth>
             Login
           </Button>
         </form>
