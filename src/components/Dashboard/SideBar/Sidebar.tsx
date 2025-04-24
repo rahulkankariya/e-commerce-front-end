@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Logo from "../../pages/logo";
+import Logo from "../../../pages/logo";
 
 interface NavItem {
   name: string;
