@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import Sidebar from "../Dashboard/SideBar/Sidebar";
-import { Menu } from "lucide-react";
+// import Sidebar from "../Dashboard/SideBar/Sidebar";
 import StatCard from "./StatsCards";
 import CustomerChart from "./Charts/CustomerCharts";
 import SalesChart from "./Charts/SalesChart";
@@ -26,33 +25,14 @@ const iconStyle = (bg: string) => ({
 });
 
 const Dashboard: React.FC = () => {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [chartTabIndex, setChartTabIndex] = useState(0);
 
   return (
     <div className="flex h-screen relative">
-      {sidebarOpen && (
-        <div
-          className="fixed inset-0 bg-transparent bg-opacity-50 z-40"
-          onClick={() => setSidebarOpen(false)}
-        />
-      )}
-
-      <div
-        className={`fixed md:static z-50 h-full w-64 bg-gray-900 transform ${
-          sidebarOpen ? "translate-x-0" : "-translate-x-full"
-        } md:translate-x-0 transition-transform duration-300`}
-      >
-        <Sidebar />
-      </div>
+     
 
       <div className="flex-1 bg-gray-100 overflow-y-auto p-4 w-full">
-        <button
-          className="md:hidden mb-4 text-gray-800"
-          onClick={() => setSidebarOpen(!sidebarOpen)}
-        >
-          <Menu className="w-6 h-6" />
-        </button>
+        
 
         <h1 className="text-2xl font-bold text-[#2b3d5f] mb-4">Dashboard</h1>
 
@@ -103,8 +83,7 @@ const Dashboard: React.FC = () => {
           </Box>
         </div>
         <div className="mt-1">
-
-        <TabFilter/>
+          <TabFilter />
         </div>
       </div>
     </div>

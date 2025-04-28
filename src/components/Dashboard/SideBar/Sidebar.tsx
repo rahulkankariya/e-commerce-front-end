@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import Logo from "../../../pages/logo";
+import React, { useState } from 'react';
+import Logo from '../../../pages/logo';
 
 interface NavItem {
   name: string;
@@ -10,10 +10,10 @@ interface NavItem {
 const navItems: NavItem[] = [
   { name: "Dashboard", path: "/dashboard" },
   {
-    name: "Orders",
+    name: "Products",
     subItems: [
-      { name: "All Orders", path: "/orders" },
-      { name: "Pending Orders", path: "/orders/pending" },
+      { name: "Product Grid", path: "/product-grid" },
+      { name: "Product List", path: "/product-list" },
     ],
   },
   { name: "Settings", path: "/settings" },
@@ -50,7 +50,7 @@ const Sidebar: React.FC = () => {
                 {item.subItems.map((sub) => (
                   <a
                     key={sub.name}
-                    href={sub.path}
+                    href={sub.path!}
                     className="block p-2 rounded hover:bg-gray-700 text-sm"
                   >
                     {sub.name}
